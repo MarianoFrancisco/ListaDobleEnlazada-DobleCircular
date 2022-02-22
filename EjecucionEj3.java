@@ -126,7 +126,9 @@ public class EjecucionEj3 {
 
     private String pedirPalabra(String mensaje) {
         System.out.print("\n" + mensaje);
-        String recolectada = scanner.next();
+        scanner.nextLine();
+        String recolectada = scanner.nextLine();
+        //scanner.next();
         return recolectada;
     }
 
