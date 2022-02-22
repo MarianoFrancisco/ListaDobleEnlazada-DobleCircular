@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class EjecucionEj3 {
 
     private static Scanner scanner = new Scanner(System.in);
-    //private Ejercicio3 lista;
+    private Ejercicio3 lista;
 
     public static void main(String[] args) {
         EjecucionEj3 ej = new EjecucionEj3();
@@ -20,7 +20,7 @@ public class EjecucionEj3 {
             opcion = pedirNumero("Que lista desea probar? ");
             switch (opcion) {
                 case 1:
-                    //lista = new ListaDoble();
+                    lista = new Ejercicio3();
                     menuLista(true);
                     break;
                 case 2:
@@ -83,7 +83,7 @@ public class EjecucionEj3 {
 
     public void contrlBuscar() {
         String palabra = pedirPalabra("Ingrese la palabra que desea buscar: ");
-        boolean encontrada = true; // lista.buscar(palabra);
+        boolean encontrada = lista.buscarInfo(palabra);
         if (encontrada) {
             System.out.println("\nLa palabra SI ha sido encontrada!");
         } else {
@@ -95,10 +95,10 @@ public class EjecucionEj3 {
     public void contrlEliminar(boolean inicio) {
 
         if (inicio) {
-            // lista.eliminarInicio(palabra);
+            lista.eliminarInicio();
 
         } else {
-            // lista.eliminarFinish(palabra);
+            lista.eliminarFinish();
         }
         System.out.println("\nLa palabra ha sido eliminada con exito");
     }
@@ -106,19 +106,19 @@ public class EjecucionEj3 {
     public void contrlAgregar(boolean inicio) {
         String palabra = pedirPalabra("Ingrese la palabra que desea agregar: ");
         if (inicio) {
-            // lista.agregarInicio(palabra);
+            lista.insertarAlInicio(palabra);
         } else {
-            // lista.agregarFinal(palabra);
+            lista.insertarAlFinal(palabra);
         }
         System.out.println("\nSe ha ingresado la palabra");
     }
 
     public void contrlImpr(boolean inicio) {
         if (inicio) {
-            // lista.imprimirInicioFin();
+            lista.imprimirInicioFin();
 
         } else {
-            // lista.imprimirFinInicio();
+            lista.imprimirFinInicio();
         }
 
         System.out.println("\nSe ha impreso la lista con exito");
