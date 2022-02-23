@@ -3,7 +3,7 @@ public class Ejercicio3Circular {
     private Nodo finish;
     private int cantidadNodos=0;
     //constructor
-    public Ejercicio3(){
+    public Ejercicio3Circular(){
         inicio=null;
         finish=null;
     }
