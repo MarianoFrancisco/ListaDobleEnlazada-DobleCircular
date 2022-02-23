@@ -1,13 +1,13 @@
-public class Ejercicio3Circular {
+public class Ejercicio3Circular extends Ejercicio3{
     private Nodo inicio;
     private Nodo finish;
     private int cantidadNodos=0;
     //constructor
     public Ejercicio3Circular(){
-        inicio=null;
-        finish=null;
+        super();
     }
     //insertar
+    @Override
     public void insertarAlInicio(String info){
         if(inicio==null){
             inicio = new Nodo(null, null, info);
@@ -19,6 +19,7 @@ public class Ejercicio3Circular {
         }
         cantidadNodos++;
     }
+    @Override
     public void insertarAlFinal(String info){
         if(inicio==null){
             finish = new Nodo(null, null, info);
@@ -30,7 +31,7 @@ public class Ejercicio3Circular {
         }
         cantidadNodos++;
     }
-    //eliminar
+    @Override
     public String eliminarInicio(){
         String dato = inicio.getInfo();
         inicio=inicio.getSiguiente();
@@ -42,6 +43,7 @@ public class Ejercicio3Circular {
         cantidadNodos--;
         return dato;
     }
+    @Override
     public String eliminarFinish(){
         String dato= finish.getInfo();
         finish=finish.getAnterior();
@@ -54,6 +56,7 @@ public class Ejercicio3Circular {
         return dato;
     }
     //imprimit datos inicio final, y viceversa
+    @Override
     public void imprimirInicioFin(){
         Nodo temporal= inicio;
         for (int i = 0; i < cantidadNodos; i++) {
@@ -67,7 +70,7 @@ public class Ejercicio3Circular {
         } while (temporal!=null && !temporal.equals(inicio)); */
     }
 
-
+    @Override
     public void imprimirFinInicio(){
         Nodo temporal=finish;
         for (int i = 0; i < cantidadNodos; i++) {
@@ -80,6 +83,7 @@ public class Ejercicio3Circular {
         } while (temporal!=null && !temporal.equals(finish)); */
     }
     //busqueda
+    @Override
     public Boolean buscarInfo(String info){
         Nodo temporal=inicio;
         for (int i = 0; i < cantidadNodos; i++) {
@@ -90,16 +94,5 @@ public class Ejercicio3Circular {
         }
         return false;
     }
-    public Nodo getInicio() {
-        return inicio;
-    }
-    public void setInicio(Nodo inicio) {
-        this.inicio = inicio;
-    }
-    public Nodo getFinish() {
-        return finish;
-    }
-    public void setFinish(Nodo finish) {
-        this.finish = finish;
-    }
+
 }
