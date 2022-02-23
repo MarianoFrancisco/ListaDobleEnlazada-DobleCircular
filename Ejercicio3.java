@@ -1,90 +1,140 @@
+import java.util.Scanner;
+
 public class Ejercicio3 {
-    private Nodo inicio;
-    private Nodo finish;
-    //constructor
-    public Ejercicio3(){
-        inicio=null;
-        finish=null;
-    }
-    //insertar
-    public void insertarAlInicio(String info){
-        if(inicio==null){
-            inicio= new Nodo(null, null, info);
-            finish= inicio;
-        }else{
-            Nodo nuevo = new Nodo(inicio, null, info);
-            inicio.setAnterior(nuevo);
-            inicio=nuevo;
-        }
-    }
-    public void insertarAlFinal(String dato){
-        if(inicio==null){
-            finish= new Nodo(null, null, dato);
-            inicio = finish;
-        }else{
-            Nodo nuevo = new Nodo(null, finish, dato);
-            finish.setSiguiente(nuevo);
-            finish=nuevo;
-        }
-    }
-    //eliminar
-    public String eliminarInicio(){
-        String dato= inicio.getInfo();
-        inicio=inicio.getSiguiente();
-        if (inicio!=null) {
-            inicio.setAnterior(null);
-        } else {
-            finish=null;
-        }
-        return dato;
-    }
-    public String eliminarFinish(){
-        String dato= finish.getInfo();
-        finish=finish.getAnterior();
-        if (finish!=null) {
-            finish.setSiguiente(null);
-        } else {
-            inicio=null;
-        }
-        return dato;
-    }
-    //imprimit datos inicio final, y viceversa
-    public void imprimirInicioFin(){
-        Nodo temporal=inicio;
-        while (temporal!=null) {
-            System.out.println(temporal.getInfo());
-            temporal=temporal.getSiguiente();
-        }
-    }
-    public void imprimirFinInicio(){
-        Nodo temporal=finish;
-        while (temporal!=null) {
-            System.out.println(temporal.getInfo());
-            temporal=temporal.getAnterior();
-        }
-    }
-    //busqueda
-    public Boolean buscarInfo(String info){
-        Nodo temporal=inicio;
-        while (temporal!=null) {
-            if (temporal.getInfo().equals(info)) {
-                return true;
-            }
-            temporal=temporal.getSiguiente();
-        }
-        return false;
-    }
-    public Nodo getInicio() {
-        return inicio;
-    }
-    public void setInicio(Nodo inicio) {
-        this.inicio = inicio;
-    }
-    public Nodo getFinish() {
-        return finish;
-    }
-    public void setFinish(Nodo finish) {
-        this.finish = finish;
+
+    private static Scanner scanner = new Scanner(System.in);
+    private ListaDoble lista;
+
+    public static void main(String[] args) {
+        Ejercicio3 ej = new Ejercicio3();
+        ej.menuPrincipal();
+
     }
 
+    public void menuPrincipal() {
+        boolean salir = false;
+        int opcion;
+        while (!salir) {
+            System.out.println("----LISTAS ENLAZADAS-----");
+            System.out.println("1)Lista enlazada doble \n2)Lista enlazada doble circular \n3)Salir");
+            opcion = pedirNumero("Que lista desea probar? ");
+            switch (opcion) {
+                case 1:
+                    lista = new ListaDoble();
+                    menuLista(true);
+                    break;
+                case 2:
+                    lista = new ListaCircular();
+                    menuLista(false);
+                    break;
+                    case 3:
+                    salir = true;
+                    break;
+
+                default:
+                    System.out.println("\nNo existe esa opcion!");
+                    break;
+            }
+        }
+    }
+
+    public void menuLista(boolean listaDoble) {
+        int opcion;
+        boolean salir = false;
+        while (!salir) {
+            System.out.println("----LISTA ENLAZADA DOBLE" + (listaDoble ? "" : " CIRCULAR") + "-----");
+            System.out.println(
+                    "1) Buscar \n2)Eliminar el inicial \n3) Eliminar el final \n4) Agregar al inicio \n5) Agregar al final"
+                            + "\n6)Imprimir del inicio al final \n7) imprimir del final al inicio \n8) Regresar");
+            opcion = pedirNumero("Seleccione una opcion: ");
+            switch (opcion) {
+                case 1:
+                    contrlBuscar();
+                    break;
+                case 2:
+                    contrlEliminar(true);
+                    break;
+                case 3:
+                    contrlEliminar(false);
+                    break;
+                case 4:
+                    contrlAgregar(true);
+                    break;
+                case 5:
+                    contrlAgregar(false);
+                    break;
+                case 6:
+                    contrlImpr(true);
+                    break;
+                case 7:
+                    contrlImpr(false);
+                    break;
+                case 8:
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("\n\nEsa opcion no existe!");
+                    break;
+
+            }
+        }
+
+    }
+
+    public void contrlBuscar() {
+        String palabra = pedirPalabra("Ingrese la palabra que desea buscar: ");
+        boolean encontrada = lista.buscarInfo(palabra);
+        if (encontrada) {
+            System.out.println("\nLa palabra SI ha sido encontrada!");
+        } else {
+            System.out.println("\nLa palabra NO ha sido encontrada");
+        }
+
+    }
+
+    public void contrlEliminar(boolean inicio) {
+
+        if (inicio) {
+            lista.eliminarInicio();
+
+        } else {
+            lista.eliminarFinish();
+        }
+        System.out.println("\nLa palabra ha sido eliminada con exito");
+    }
+
+    public void contrlAgregar(boolean inicio) {
+        String palabra = pedirPalabra("Ingrese la palabra que desea agregar: ");
+        if (inicio) {
+            lista.insertarAlInicio(palabra);
+        } else {
+            lista.insertarAlFinal(palabra);
+        }
+        System.out.println("\nSe ha ingresado la palabra");
+    }
+
+    public void contrlImpr(boolean inicio) {
+        if (inicio) {
+            lista.imprimirInicioFin();
+
+        } else {
+            lista.imprimirFinInicio();
+        }
+
+        System.out.println("\nSe ha impreso la lista con exito");
+    }
+
+    private String pedirPalabra(String mensaje) {
+        System.out.print("\n" + mensaje);
+        scanner.nextLine();
+        String recolectada = scanner.nextLine();
+        //scanner.next();
+        return recolectada;
+    }
+
+    private int pedirNumero(String mensaje) {
+        System.out.print("\n" + mensaje);
+        int recolectada = scanner.nextInt();
+        return recolectada;
+    }
 }
