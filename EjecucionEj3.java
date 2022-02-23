@@ -24,7 +24,7 @@ public class EjecucionEj3 {
                     menuLista(true);
                     break;
                 case 2:
-                    //lista = new ListaCircular();
+                    lista = new Ejercicio3Circular();
                     menuLista(false);
                     break;
                     case 3:

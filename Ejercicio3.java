@@ -74,5 +74,17 @@ public class Ejercicio3 {
         }
         return false;
     }
+    public Nodo getInicio() {
+        return inicio;
+    }
+    public void setInicio(Nodo inicio) {
+        this.inicio = inicio;
+    }
+    public Nodo getFinish() {
+        return finish;
+    }
+    public void setFinish(Nodo finish) {
+        this.finish = finish;
+    }
 
 }
